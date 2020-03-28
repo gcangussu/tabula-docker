@@ -1,10 +1,12 @@
-FROM openjdk
+FROM openjdk:11.0.6-jre-slim-buster
 
-ENV TABULA_VERSION 1.1.1
+RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*
 
-RUN wget -q https://github.com/tabulapdf/tabula/releases/download/v$TABULA_VERSION/tabula-jar-$TABULA_VERSION.zip && \
-    unzip tabula-jar-$TABULA_VERSION.zip && \
-    rm tabula-jar-$TABULA_VERSION.zip
+ENV TABULA_VERSION 1.2.1
+
+RUN wget -q https://github.com/tabulapdf/tabula/releases/download/v$TABULA_VERSION/tabula-jar-$TABULA_VERSION.zip \
+  && unzip tabula-jar-$TABULA_VERSION.zip \
+  && rm tabula-jar-$TABULA_VERSION.zip
 
 EXPOSE 8080
 
